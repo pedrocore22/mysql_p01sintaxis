@@ -108,4 +108,40 @@ para un solo registro.
 DELETE FROM articulos
 WHERE id = 3;
 
+## CONSULTAS VARIADAS
+
+Consulta de los valores distintos de un campo
+
+SELECT DISTINCT marca
+FROM articulos;
+
+--- Añadimos una nueva tabla para tener nuevos datos ---
+
+CREATE TABLE proveedores (
+	id int AUTO_INCREMENT PRIMARY KEY,
+    cif varchar(9) UNIQUE NOT NULL,
+    nombre varchar(255) NOT NULL,
+    direccion varchar(255) NOT NULL,
+    localidad varchar(255) NOT NULL,
+    fecha_alta DATE NOT NULL
+);
+
+INSERT INTO proveedores (cif, nombre, direccion, localidad, fecha_alta)
+VALUES ('A12345678', 
+        'Logística Int S.A.',
+        'Av París 20',
+        'Cáceres',
+        CURDATE());
+INSERT INTO proveedores (cif, nombre, direccion, localidad, fecha_alta)
+VALUES ('A87654321', 
+        'Distribuciones Cáceres S.A.',
+        'Gil Cordero 30',
+        'Cáceres',
+        CURDATE());
+INSERT INTO proveedores (cif, nombre, direccion, localidad, fecha_alta)
+VALUES ('A11223344', 
+        'Madrid Sports S.A.',
+        'Príncipe de Vergara, 48',
+        'Madrid',
+        CURDATE());    
 
