@@ -77,9 +77,35 @@ ADD UNIQUE (sku);
 INSERT INTO articulos (sku, marca, modelo, descripcion, fecha_alta)
 VALUES ('F412','Adidas','Pace','Lorem...', CURDATE());
 
+### Leer registros
 
+La forma menos restrictiva es leer todos los registros
+de la base de datos
 
+SELECT * FROM articulos; // Consulta
 
+Si necesitamos solamente algunos campos (proyección) se pasan
+separados por comas
 
+SELECT marca, modelo FROM articulos;
+
+*Más adelante vemos más consultas
+
+### Actualizar registros
+
+La actualización aunque se puede hacer en masa normalmente se hace
+para un solo registro.
+
+UPDATE articulos
+SET modelo = 'Pace gold'
+WHERE id = 3;
+
+### Eliminar registros
+
+Para eliminar (si fuera posible) se suele hacer también
+para un solo registro.
+
+DELETE FROM articulos
+WHERE id = 3;
 
 
