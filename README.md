@@ -145,3 +145,82 @@ VALUES ('A11223344',
         'Madrid',
         CURDATE());    
 
+-------------------------------
+
+Consultas con valores de igualdad en un campo
+
+SELECT *
+FROM proveedores
+WHERE localidad = 'Cáceres';
+
+Consultas con valores de igualdad en un campo 
+con patrones de búsqueda
+
+SELECT *
+FROM articulos
+WHERE modelo LIKE 'R%';
+
+--- Modificar tabla artículo para añadir un campo
+de género con un ENUM de valores ----
+
+ALTER TABLE articulos
+ADD genero ENUM('Hombre','Mujer','Niña','Niño','Todos');
+
+Añadimos un registro con el nuevo campo:
+
+INSERT INTO articulos (sku, marca, modelo, genero, fecha_alta)
+VALUES ('G77A',
+        'New Balance', 
+        'Classic', 
+        'Niña',
+        CURDATE());
+
+-------------------------------------
+
+Consultas con valores de igualdad en varios campos
+en los que se han de cumplir las dos condiciones (AND lógico)
+
+SELECT *
+FROM articulos
+WHERE marca = 'New Balance' AND genero = 'Niña';
+
+Consultas con valores de igualdad en varios campos
+en los que se han de cumplir alguna de las condiciones (OR lógico)
+
+SELECT *
+FROM articulos
+WHERE marca = 'Adidas' OR genero = 'Niña';
+
+Consultas con valores de desigualdad (NOT lógico)
+
+SELECT *
+FROM proveedores
+WHERE NOT localidad = 'Cáceres';
+
+Consultas ordenadas
+
+Por ejemplo por varios campos con diferente sentido
+
+SELECT *
+FROM articulos
+ORDER BY marca ASC, modelo DESC;
+
+Se pueden combinar con el filtrado por campos
+
+SELECT *
+FROM articulos
+WHERE marca = 'Nike'
+ORDER BY modelo ASC;
+
+## TABLAS CON CLAVES FORÁNEAS (RELACIONES)
+
+CREATE TABLE ofertas (
+    id int AUTO_INCREMENT PRIMARY KEY,
+    articuloID int,
+    proveedorID int,
+    precio double NOT NULL,
+    dias_entrega int NOT NULL,
+    fecha_oferta DATE NOT NULL,
+    FOREIGN KEY (articuloID) REFERENCES articulos(id),
+    FOREIGN KEY (proveedorID) REFERENCES proveedores(id)
+)
