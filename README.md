@@ -224,3 +224,28 @@ CREATE TABLE ofertas (
     FOREIGN KEY (articuloID) REFERENCES articulos(id),
     FOREIGN KEY (proveedorID) REFERENCES proveedores(id)
 )
+
+--------- Introducimos varias ofertas ---------
+
+INSERT INTO ofertas(articuloID, 
+                    proveedorID, 
+                    precio, 
+                    dias_entrega, 
+                    fecha_oferta)
+VALUES (<valor>, <valor>, 38.2, 3, CURDATE());
+
+--------------------------------------------------
+
+## CONSULTAS EN TABLAS RELACIONADAS (JOIN)
+
+Los JOIN más usados y básicos son del tipo INNER
+
+SELECT ofertas.id, 
+       proveedores.nombre, 
+       articulos.marca, 
+       articulos.modelo,
+       ofertas.precio,
+       ofertas.dias_entrega
+FROM ofertas
+INNER JOIN articulos ON ofertas.articuloID = articulos.id
+INNER JOIN proveedores ON ofertas.proveedorID = proveedores.id;
